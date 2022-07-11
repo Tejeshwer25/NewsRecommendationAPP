@@ -1,3 +1,4 @@
+const path = require("path");
 const dotenv = require("dotenv");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -20,6 +21,19 @@ app.use((req, res, next) => {
 
 // routes
 app.use("/api/user", userRoutes);
+
+// Serve Frontend
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(
+      path.resolve(__dirname, "../", "frontend", "build", "index.html")
+    )
+  );
+} else {
+  app.get("/", (req, res) => res.send("Please use production mode"));
+}
 
 // connection to db
 mongoose

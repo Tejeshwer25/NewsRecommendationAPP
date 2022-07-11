@@ -1,0 +1,44 @@
+.form > input {
+  width: 100%;
+
+  font-size: 1.1rem;
+
+  padding: 0.5rem;
+
+  border: none;
+  outline: none;
+  border-bottom: 1px solid black;
+
+  margin: 0.5rem 0rem;
+}
+
+.form > input[type="submit"] {
+  background-color: transparent;
+
+  border: 1px solid black;
+  border-radius: 10px;
+
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.form > input[type="submit"]:hover {
+  background-color: black;
+  color: white;
+}
+
+.form > div {
+  margin: 1rem 0rem;
+  font-size: 1.2rem;
+}
+
+.form > div > p {
+  margin-bottom: 0.5rem;
+}
+
+.form > div > label {
+  margin: 0.5rem;
+  cursor: pointer;
+}
+.form > div > label > input {
+  margin-right: 0.25rem;
+}
