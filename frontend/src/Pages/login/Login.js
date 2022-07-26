@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 import Form from "../../Components/form/Form";
-
 import styles from "./Login.module.css";
-import { Link } from "react-router-dom";
+import { UserContext } from "../../Context/UserContext";
 
 function Login() {
   const [loginData, setLoginData] = useState({
@@ -13,6 +13,16 @@ function Login() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const { userDetail, loadUser } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userDetail.name) {
+      navigate("/home");
+    }
+  }, [userDetail.name, navigate]);
 
   function updateData(e) {
     if (error) setError("");
@@ -38,6 +48,10 @@ function Login() {
       sessionStorage.setItem("name", data.name);
       sessionStorage.setItem("id", data._id);
       sessionStorage.setItem("topics", data.newsTopics);
+
+      loadUser();
+
+      navigate("/home");
     } catch (e) {
       const errorMsg = e.response.data;
       const parser = new DOMParser();

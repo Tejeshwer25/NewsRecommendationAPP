@@ -83,6 +83,39 @@ const getUserData = asyncHandler(async (req, res) => {
   });
 });
 
+const changePassword = asyncHandler(async (req, res) => {
+  const { id, oldPassword, newPassword } = req.body;
+  const user = await User.findOne({ _id: id });
+
+  if (user) {
+    if (await bcrypt.compare(oldPassword, user.password)) {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(newPassword, salt);
+      await User.findByIdAndUpdate(id, { password: hashedPassword });
+      res.status(200).json({
+        message: "Password changed successfully",
+      });
+    } else throw new Error("Old password is incorrect");
+  } else throw new Error("User does not exist");
+});
+
+const changeNewsTopics = asyncHandler(async (req, res) => {
+  const { id, newTopics } = req.body;
+  const user = await User.findOne({ _id: id });
+
+  if (user) {
+    try {
+      await User.findByIdAndUpdate(id, { newsTopics: newTopics });
+      res.status(200).json({
+        message: "News topics changed successfully",
+        topics: newTopics,
+      });
+    } catch (err) {
+      throw new Error(err);
+    }
+  } else throw new Error("User does not exist");
+});
+
 // Generate JWT token
 const generateToken = (userID) => {
   return jwt.sign({ userID }, process.env.JWT_SECRET, { expiresIn: "30d" });
@@ -92,4 +125,6 @@ module.exports = {
   registerUser,
   loginUser,
   getUserData,
+  changePassword,
+  changeNewsTopics,
 };

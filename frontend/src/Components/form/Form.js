@@ -1,6 +1,6 @@
 import styles from "./Form.module.css";
 
-function Form({ formType, updateData, data, submitForm }) {
+function Form({ formType, updateData, data, submitForm, topic }) {
   return (
     <form action={submitForm} className={styles.form}>
       {formType === "Register" ? (
@@ -34,15 +34,12 @@ function Form({ formType, updateData, data, submitForm }) {
       {formType === "Register" ? (
         <div>
           <p>Choose Topics: </p>
-          <label>
-            <input type="checkbox" name="Technology" onChange={updateData} />
-            Technology
-          </label>
-
-          <label>
-            <input type="checkbox" name="Business" onChange={updateData} />
-            Business
-          </label>
+          {topic.map((topic) => (
+            <label>
+              <input type="checkbox" name={topic} onChange={updateData} />
+              {topic}
+            </label>
+          ))}
         </div>
       ) : (
         <></>

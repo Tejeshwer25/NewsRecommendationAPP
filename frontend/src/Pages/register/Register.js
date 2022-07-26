@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import Form from "../../Components/form/Form";
 import styles from "../login/Login.module.css";
+import { UserContext } from "../../Context/UserContext";
 
 function Register() {
   const [registerData, setRegisterData] = useState({
@@ -14,6 +15,26 @@ function Register() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const { userDetail, loadUser } = useContext(UserContext);
+
+  const topics = [
+    "business",
+    "entertainment", 
+    "general", 
+    "health",
+    "science",
+    "sports",
+    "technology"
+  ];
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userDetail.name) {
+      navigate("/home");
+    }
+  }, [userDetail.name, navigate]);
 
   function updateTopics(e) {
     const topicArray = registerData.newsTopics;
@@ -56,7 +77,8 @@ function Register() {
       sessionStorage.setItem("id", data._id);
       sessionStorage.setItem("topics", data.newsTopics);
 
-      //   history.push("/");
+      loadUser();
+      navigate("/home");
     } catch (e) {
       const errorMsg = e.response.data;
       const parser = new DOMParser();
@@ -83,6 +105,7 @@ function Register() {
           updateData={updateData}
           data={registerData}
           submitForm={submitForm}
+          topic={topics}
         />
 
         <p>

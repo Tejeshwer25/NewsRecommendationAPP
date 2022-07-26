@@ -3,6 +3,8 @@ const {
   registerUser,
   loginUser,
   getUserData,
+  changePassword,
+  changeNewsTopics,
 } = require("../Controllers/userController.js");
 const { protect } = require("../Middleware/authMiddleware.js");
 
@@ -17,4 +19,9 @@ router.post("/login", loginUser);
 // Get User details
 router.get("/detail", protect, getUserData);
 
+// Change User Password
+router.put("/changePassword", changePassword);
+
+// Change User Topics
+router.put("/updateTopics", changeNewsTopics);
 module.exports = router;

@@ -1,0 +1,19 @@
+.home {
+  margin: 2rem;
+}
+
+.home_section {
+  margin: 2rem 0rem;
+}
+
+.home_cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home_cardContainer * {
+  text-decoration: none;
+  width: max-content;
+}

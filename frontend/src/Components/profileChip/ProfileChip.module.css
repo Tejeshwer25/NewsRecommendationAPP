@@ -1,0 +1,37 @@
+.profileChip {
+  position: relative;
+
+  border: 1px solid black;
+  border-radius: 5rem;
+  padding: 1rem;
+
+  cursor: pointer;
+}
+
+.profileChip_toggleMenu {
+  position: absolute;
+  top: 56px;
+  left: 10px;
+  width: 92%;
+
+  background-color: #e3e3e3;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.profileChip_toggleMenu > ul {
+  list-style: none;
+}
+
+.profileChip_toggleMenu a {
+  text-decoration: none;
+  color: black;
+}
+
+.profileChip_toggleMenu > ul li {
+  padding: 0.5rem 0.25rem;
+  border-radius: 5px;
+}
+.profileChip_toggleMenu > ul li:hover {
+  background-color: white;
+}

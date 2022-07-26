@@ -1,0 +1,35 @@
+.userAccount_section {
+  width: 60%;
+  margin: 2rem auto;
+}
+
+.userAccount_section h3 {
+  font-size: 2rem;
+}
+
+.userAccount_section h4 {
+  font-size: 1.65rem;
+}
+
+.userAccount_form {
+  margin-top: 2rem;
+  background-color: #e3e3e3;
+  padding: 1rem 2rem;
+}
+
+.userAccount_form h5 {
+  font-size: 1.5rem;
+  padding: 1rem;
+
+  cursor: pointer;
+}
+.userAccount_form h5:hover {
+  background-color: #fff;
+}
+
+.userAccount_form > div > div {
+  background-color: #333;
+  color: #f3f3f3;
+
+  padding: 1rem 2rem;
+}
